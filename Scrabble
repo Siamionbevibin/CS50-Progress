@@ -1,0 +1,46 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main(void)
+{
+    string Player1word = " ";
+    string Player2word = " ";
+    int Player1score = 0;
+    int Player2score = 0;
+    Player1word = get_string("Please enter your word Player 1: ");
+    Player2word = get_string("Please enter your word Player 2: ");
+
+    int points[] = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
+
+    for (int i = 0; i < strlen(Player1word); i++)
+    {
+        char letter = toupper(Player1word[i]);
+        if (letter >='A' && letter <= 'Z')
+        {
+            Player1score += points[letter - 'A'];
+        }
+    }
+
+
+    for (int i = 0; i < strlen(Player2word); i++)
+    {
+        char letter = toupper(Player2word[i]);
+        if (letter >='A' && letter <= 'Z')
+        {
+            Player2score += points[letter - 'A'];
+        }
+    }
+    if (Player1score > Player2score)
+    {
+        printf("%s", "Player 1 wins!");
+    }
+    if (Player2score > Player1score)
+    {
+        printf("%s", "Player 2 wins!");
+    }
+    if (Player1score == Player2score)
+    {
+        printf("%s", "Tie!");
+    }
+}
