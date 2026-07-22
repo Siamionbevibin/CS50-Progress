@@ -1,0 +1,61 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <math.h>
+int main(void)
+{
+    string text = get_string("Please enter the text:");
+
+
+    int letter_count = 0;
+    int word_count = 0;
+    int sentence_count = 0;
+
+
+    for (int i = 0; text[i] != '\0'; i++)
+    {
+        if (islower((unsigned char)text[i]) || isupper((unsigned char)text[i]))
+        {
+            letter_count++;
+        }
+    }
+
+
+    for (int d = 0; text[d] != '\0'; d++)
+    {
+        if (!isspace((unsigned char)text[d]) && (d == 0 || isspace((unsigned char)text[d - 1])))
+        {
+            word_count++;
+        }
+    }
+
+
+    for (int s = 0; text[s] != '\0'; s++)
+    {
+        if (text[s] == '.' || text[s] == '!' || text[s] == '?')
+        {
+            sentence_count++;
+        }
+    }
+
+
+    float L = ((float)letter_count / word_count) * 100;
+    float S = ((float)sentence_count / word_count) * 100;
+
+    float index = 0.0588 * L - 0.296 * S - 15.8;
+
+    int grade = round(index);
+
+    if (grade < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else if (grade >= 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else
+    {
+        printf("Grade %i\n", grade);
+    }
+}
